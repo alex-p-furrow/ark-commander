@@ -3,12 +3,33 @@
     "version": "0.1.0",
     "private": true,
     "main": "public/electron.js",
+    "homepage": "./",
+    "author": {
+        "name": "Alex Furrow",
+        "email": "alex@gietrivia.com",
+        "url": "https://gietrivia.com"
+    },
+    "build": {
+        "appId": "com.gietrivia.question-converter",
+        "productName": "Question Converter",
+        "copyright": "Copyright © 2019 ${author}",
+        "files": [
+            "build/**/*",
+            "node_modules/**/*"
+        ],
+        "directories": {
+            "buildResources": "assets"
+        }
+    },
     "scripts": {
         "start": "rescripts start",
         "build": "rescripts build",
         "test": "rrescripts test",
         "eject": "react-scripts eject",
-        "electron-dev": "concurrently \"cross-env BROWSER=none yarn start\" \"wait-on http://localhost:3000 && electron .\""
+        "electron-dev": "concurrently \"cross-env BROWSER=none yarn start\" \"wait-on http://localhost:3000 && electron .\"",
+        "postinstall": "electron-builder install-app-deps",
+        "preelectron-pack": "yarn build",
+        "electron-pack": "electron-builder -w"
     },
     "eslintConfig": {
         "extends": "react-app"
@@ -38,6 +59,7 @@
         "cross-env": "^6.0.3",
         "electron": "^7.1.1",
         "electron-builder": "^21.2.0",
+        "typescript": "^3.7.2",
         "wait-on": "^3.3.0"
     }
 }
