@@ -2,17 +2,13 @@
     "name": "ark-commander",
     "version": "0.1.0",
     "private": true,
-    "dependencies": {
-        "electron-is-dev": "^1.1.0",
-        "react": "^16.12.0",
-        "react-dom": "^16.12.0",
-        "react-scripts": "3.2.0"
-    },
+    "main": "public/electron.js",
     "scripts": {
         "start": "react-scripts start",
         "build": "react-scripts build",
         "test": "react-scripts test",
-        "eject": "react-scripts eject"
+        "eject": "react-scripts eject",
+        "electron-dev": "concurrently \"cross-env BROWSER=none yarn start\" \"wait-on http://localhost:3000 && electron .\""
     },
     "eslintConfig": {
         "extends": "react-app"
@@ -29,8 +25,15 @@
             "last 1 safari version"
         ]
     },
+    "dependencies": {
+        "electron-is-dev": "^1.1.0",
+        "react": "^16.12.0",
+        "react-dom": "^16.12.0",
+        "react-scripts": "3.2.0"
+    },
     "devDependencies": {
         "concurrently": "^5.0.0",
+        "cross-env": "^6.0.3",
         "electron": "^7.1.1",
         "electron-builder": "^21.2.0",
         "wait-on": "^3.3.0"
