@@ -1,4 +1,5 @@
 import React, { memo } from "react";
+import { useStoreActions } from "easy-peasy";
 import { Chip, TextField, IconButton, Tooltip } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import OpenInNewIcon from "@material-ui/icons/OpenInNew";
@@ -27,6 +28,7 @@ const useStyles = makeStyles(theme => {
 const ArkItemActions = memo(({ wikiUrl, stackSize, blueprintPath }) => {
     const classes = useStyles();
     const [quantity, setQuantity] = React.useState(stackSize);
+    const openSnackbar = useStoreActions(actions => actions.snackbar.openSnackbar);
 
     const handleWikiLinkClick = event => {
         shell.openExternal(wikiUrl);
@@ -39,6 +41,7 @@ const ArkItemActions = memo(({ wikiUrl, stackSize, blueprintPath }) => {
     const handleCopyClick = event => {
         const command = `cheat giveitem ${blueprintPath} ${quantity} 0 0`;
         clipboard.writeText(command);
+        openSnackbar({ variant: "info", message: "Command copied to clipboard." });
     };
 
     return (
