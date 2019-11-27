@@ -1,7 +1,9 @@
 import React from "react";
 import { useStoreState, useStoreActions } from "easy-peasy";
+import { Switch, Route } from "react-router-dom";
 import { Paper, List, ListItem, ListItemText, Divider } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
+import ArkItemsNav from "./arkItemsNav";
 
 const useStyles = makeStyles(theme => {
     return {
@@ -22,14 +24,9 @@ export default function SideBar() {
     const categories = useStoreState(state => state.navigation.categories);
     const selectedCategory = useStoreState(state => state.navigation.selectedCategory);
     const setSelectedCategory = useStoreActions(actions => actions.navigation.setSelectedCategory);
-    const setSelectedItemCategory = useStoreActions(actions => actions.items.setSelectedItemCategory);
 
     const handleCategoryClick = (event, item) => {
         setSelectedCategory(item);
-    };
-
-    const handleSubCategoryClick = (event, item) => {
-        setSelectedItemCategory(item);
     };
 
     return (
@@ -47,15 +44,18 @@ export default function SideBar() {
                 ))}
             </List>
             <Divider />
-            {selectedCategory.subCategories && (
-                <List className={classes.scroll}>
-                    {selectedCategory.subCategories.map((item, index) => (
-                        <ListItem button key={item} dense={true} onClick={event => handleSubCategoryClick(event, item)}>
-                            <ListItemText primary={item} />
+            <List className={classes.scroll}>
+                <Switch>
+                    <Route path="/creatures">
+                        <ListItem>
+                            <ListItemText primary={"TODO"} />
                         </ListItem>
-                    ))}
-                </List>
-            )}
+                    </Route>
+                    <Route path={["/", "/items"]}>
+                        <ArkItemsNav />
+                    </Route>
+                </Switch>
+            </List>
         </Paper>
     );
 }

@@ -1,15 +1,16 @@
 import { createStore, action } from "easy-peasy";
+import { createMemoryHistory } from "history";
 import { getArkItems, getArkItemCategories } from "./utils/arkItems";
 
-const arkItemCategories = getArkItemCategories();
 const navCategories = [
-    { name: "Items", subCategories: arkItemCategories },
-    { name: "Creatures", subCategories: null }
+    { name: "Items", route: "/items" },
+    { name: "Creatures", route: "/creatures" }
 ];
 
 const items = {
+    categories: getArkItemCategories(),
     filteredItems: getArkItems(),
-    selectedItemCategory: null,
+    categoryFilter: null,
     searchTerm: null,
     setSelectedItemCategory: action((state, payload) => {
         state.selectedItemCategory = payload;
@@ -27,10 +28,12 @@ const items = {
 };
 
 const navigation = {
+    history: createMemoryHistory(),
     categories: navCategories,
     selectedCategory: navCategories[0],
     setSelectedCategory: action((state, payload) => {
         state.selectedCategory = payload;
+        state.history.push(payload.route);
     })
 };
 

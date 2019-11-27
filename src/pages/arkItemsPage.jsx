@@ -4,8 +4,8 @@ import AutoSizer from "react-virtualized-auto-sizer";
 import { VariableSizeList } from "react-window";
 import { ExpansionPanel, ExpansionPanelSummary, ExpansionPanelActions, Divider } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import ArkItemSummary from "./arkItemSummary";
-import ArkItemActions from "./arkItemActions";
+import ArkItemSummary from "../components/arkItemSummary";
+import ArkItemActions from "../components/arkItemActions";
 
 const summaryHeight = 80;
 const actionsHeight = 80;
@@ -43,7 +43,7 @@ const useStyles = makeStyles(theme => {
     };
 });
 
-export default function ItemsDisplay() {
+export default function ArkItemsPage() {
     const classes = useStyles();
     const [expanded, setExpanded] = React.useState(null);
     const arkItems = useStoreState(state => state.items.filteredItems);
