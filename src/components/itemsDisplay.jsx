@@ -2,7 +2,7 @@ import React, { memo } from "react";
 import { useStoreState } from "easy-peasy";
 import AutoSizer from "react-virtualized-auto-sizer";
 import { VariableSizeList } from "react-window";
-import { ExpansionPanel, ExpansionPanelSummary, ExpansionPanelDetails, ExpansionPanelActions, Divider, Button } from "@material-ui/core";
+import { ExpansionPanel, ExpansionPanelSummary, ExpansionPanelActions, Divider } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import ArkItemSummary from "./arkItemSummary";
 import ArkItemActions from "./arkItemActions";
