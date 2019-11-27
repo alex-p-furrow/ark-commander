@@ -6,12 +6,23 @@ const navCategories = [
     { name: "Items", subCategories: arkItemCategories },
     { name: "Creatures", subCategories: null }
 ];
-console.log(arkItemCategories);
+
 const items = {
     filteredItems: getArkItems(),
-    setSelectedCategory: action((state, payload) => {
-        state.selectedCategory = payload;
-        state.filteredItems = payload ? getArkItems(payload) : getArkItems();
+    selectedItemCategory: null,
+    searchTerm: null,
+    setSelectedItemCategory: action((state, payload) => {
+        state.selectedItemCategory = payload;
+        state.filteredItems = getArkItems(payload, state.searchTerm);
+    }),
+    setSearchTerm: action((state, payload) => {
+        state.searchTerm = payload;
+        state.filteredItems = getArkItems(state.selectedItemCategory, payload);
+    }),
+    resetFilters: action((state, payload) => {
+        state.selectedItemCategory = null;
+        state.searchTerm = null;
+        state.filteredItems = getArkItems();
     })
 };
 
