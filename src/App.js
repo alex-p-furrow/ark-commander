@@ -1,10 +1,12 @@
 import React from "react";
-import { CssBaseline } from "@material-ui/core";
+import { useStoreState, useStoreActions } from "easy-peasy";
+import { CssBaseline, Snackbar } from "@material-ui/core";
 import { createMuiTheme, makeStyles, ThemeProvider } from "@material-ui/core/styles";
 import { blueGrey, pink } from "@material-ui/core/colors";
 import TitleBar from "./components/titleBar";
 import SideBar from "./components/sideBar";
 import ItemsDisplay from "./components/itemsDisplay";
+import SnackbarContentWrapper from "./components/snackbarContentWrapper";
 
 const theme = createMuiTheme({
     palette: {
@@ -37,6 +39,18 @@ const useStyles = makeStyles(theme => {
 
 function App() {
     const classes = useStyles();
+    const isOpen = useStoreState(state => state.snackbar.isOpen);
+    const variant = useStoreState(state => state.snackbar.variant);
+    const message = useStoreState(state => state.snackbar.message);
+    const clearSnackbar = useStoreActions(actions => actions.snackbar.clearSnackbar);
+
+    const handleClose = (event, reason) => {
+        if (reason === "clickaway") {
+            return;
+        }
+
+        clearSnackbar();
+    };
 
     return (
         <ThemeProvider theme={theme}>
@@ -50,6 +64,17 @@ function App() {
                             <ItemsDisplay />
                         </main>
                     </div>
+                    <Snackbar
+                        anchorOrigin={{
+                            vertical: "top",
+                            horizontal: "center"
+                        }}
+                        open={isOpen}
+                        autoHideDuration={5000}
+                        onClose={handleClose}
+                    >
+                        <SnackbarContentWrapper onClose={handleClose} variant={variant} message={message} />
+                    </Snackbar>
                 </div>
             </React.Fragment>
         </ThemeProvider>

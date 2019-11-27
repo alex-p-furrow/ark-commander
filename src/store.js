@@ -34,9 +34,26 @@ const navigation = {
     })
 };
 
+const snackbar = {
+    isOpen: false,
+    variant: "info",
+    message: "",
+    clearSnackbar: action((state, payload) => {
+        state.isOpen = false;
+        state.variant = "info";
+        state.message = "";
+    }),
+    openSnackbar: action((state, payload) => {
+        state.isOpen = true;
+        state.variant = payload.variant;
+        state.message = payload.message;
+    })
+};
+
 const storeModel = {
     items: items,
-    navigation: navigation
+    navigation: navigation,
+    snackbar: snackbar
 };
 
 export const store = createStore(storeModel);
