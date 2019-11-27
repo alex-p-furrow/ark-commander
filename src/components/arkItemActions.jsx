@@ -58,13 +58,7 @@ const ArkItemActions = memo(({ wikiUrl, stackSize, blueprintPath }) => {
                     onChange={event => handleQuantityChange(event)}
                 />
                 <Tooltip title="copy command">
-                    <IconButton
-                        color="primary"
-                        aria-label="upload picture"
-                        component="span"
-                        clickable
-                        onClick={event => handleCopyClick(event)}
-                    >
+                    <IconButton color="primary" aria-label="upload picture" component="span" onClick={event => handleCopyClick(event)}>
                         <FileCopyIcon />
                     </IconButton>
                 </Tooltip>
