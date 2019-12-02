@@ -10,8 +10,8 @@
         "url": "https://gietrivia.com"
     },
     "build": {
-        "appId": "com.gietrivia.question-converter",
-        "productName": "Question Converter",
+        "appId": "com.afurrow.ark-commander",
+        "productName": "Ark Commander",
         "copyright": "Copyright © 2019 ${author}",
         "files": [
             "build/**/*",
